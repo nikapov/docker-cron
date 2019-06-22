@@ -2,10 +2,20 @@ FROM ubuntu:latest
 
 # Install cron
 RUN apt-get update
-RUN apt-get install cron
+RUN apt-get -y install cron
+RUN apt-get -y install bluez
+RUN apt-get -y install python
+RUN apt-get -y install python-pip
+RUN apt-get -y install build-essential
+RUN apt-get -y install libglib2.0-dev
+RUN pip install bluepy
+RUN pip install paho-mqtt
 
 # Add crontab file in the cron directory
 ADD crontab /etc/cron.d/simple-cron
+
+# Add oregon.py file 
+ADD oregon.py /oregon.py
 
 # Add shell script and grant execution rights
 ADD script.sh /script.sh
